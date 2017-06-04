@@ -1,3 +1,26 @@
-<h1>
-  {{title}}
-</h1>
+<md-toolbar color="primary">
+  <span>{{ title }}</span>
+</md-toolbar>
+<md-card>
+  <md-card-header>
+    <md-card-title>Progress</md-card-title>
+  </md-card-header>
+  <md-card-content>
+    <md-progress-bar
+      color="accent"
+      mode="indeterminate">
+    </md-progress-bar>
+  </md-card-content>
+</md-card>
+<md-card>
+  <md-card-header>
+    <md-card-title>Input</md-card-title>
+  </md-card-header>
+  <md-card-content>
+    <md-input-container align="end" class="input-container" dividerColor="{{ color }}">
+      <input mdInput value="{{ model }}">
+      <span mdSuffix>-staticSuffix</span>
+      <!--span mdError *ngIf="!model">This field is required</span--><!-- this does not work yet-->
+    </md-input-container>
+  </md-card-content>
+</md-card>

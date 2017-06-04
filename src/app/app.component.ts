@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  public title: string = 'My App';
+  public model: string = '';
+
+  public get color (): string {
+    return this.model ? 'primary' : 'warn';
+  }
+
 }
