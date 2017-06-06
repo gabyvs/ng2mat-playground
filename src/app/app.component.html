@@ -18,9 +18,10 @@
   </md-card-header>
   <md-card-content>
     <md-input-container align="end" class="input-container" dividerColor="{{ color }}">
-      <input mdInput value="{{ model }}">
+      <input mdInput type="text" [formControl]="myInput">
       <span mdSuffix>-staticSuffix</span>
-      <!--span mdError *ngIf="!model">This field is required</span--><!-- this does not work yet-->
+      <md-hint *ngIf="!myInput.value" align="end" class="hint-error">This field is required</md-hint>
+      <md-hint *ngIf="!myInput.valid" align="end" class="hint-error">Spaces are not allowed</md-hint>
     </md-input-container>
   </md-card-content>
 </md-card>
