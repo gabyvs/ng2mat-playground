@@ -7,34 +7,37 @@ import 'rxjs/add/operator/map';
 
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  private subscription: Subscription;
-  public title: string = 'My App';
-  public myInput = new FormControl('alohomora', Validators.pattern(/^\S+$/));
 
-  public get color (): string {
-    return this.myInput.valid ? 'primary' : 'warn';
-  }
+    private subscription: Subscription;
 
-  public ngOnInit () {
-    this.subscription = this.myInput
-      .valueChanges
-      .debounceTime(400)
-      .distinctUntilChanged()
-      //.switchMap(value => this.service.search(value))
-      .subscribe();
+    public title: string = 'My App';
 
-    // TODO: I could do not subscribe and instead to async pipe and let the template handle things, possibly?
-  }
+    public myInput = new FormControl('alohomora', [
+        Validators.required,
+        Validators.pattern(/^\S+$/)]
+    );
 
-  public ngOnDestroy () {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    public get color (): string {
+        return this.myInput.valid ? 'primary' : 'warn';
     }
-  }
+
+    public ngOnInit () {
+        this.myInput
+            .valueChanges
+            .debounceTime(500)
+            .distinctUntilChanged()
+            .subscribe();
+    }
+
+    public ngOnDestroy () {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
 
 }
